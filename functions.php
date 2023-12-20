@@ -211,8 +211,8 @@ function regristrasi($data){
   global $conn;
   $Nama_pelanggan = strtolower(stripslashes($data['Nama_pelanggan'])); 
   $Alamat_pelanggan = $data['Alamat_pelanggan']; 
-  $password = mysqli_real_escape_string($conn,$data['password']); 
-  $password2 = mysqli_real_escape_string($conn,$data['password2']); 
+  $password = $data['password']; 
+  $password2 = $data['password2']; 
 
   //cek username udah ada atau belum
   $result =mysqli_query($conn,"SELECT Nama_pelanggan FROM pelanggan WHERE Nama_pelanggan = '$Nama_pelanggan';");
@@ -232,9 +232,9 @@ function regristrasi($data){
   }
 
   //enkripsi passrod
-  $password = password_hash($password, PASSWORD_DEFAULT);
+  // $password = password_hash($password, PASSWORD_DEFAULT);
 
   //tambah user baru ke database
-  mysqli_query($conn,"INSERT INTO pelanggan VALUES('','$username', '$password')");
+  mysqli_query($conn,"INSERT INTO pelanggan VALUES('','$password','$Nama_pelanggan','', '$Alamat_pelanggan')");
   return mysqli_affected_rows($conn);
 }

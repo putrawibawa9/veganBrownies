@@ -1,42 +1,42 @@
 <?php
 
-session_start();
+// session_start();
 
 //cek cookie
-if(isset($_COOKIE['login'])){
-    if($_COOKIE['login']=='true'){
-        $_SESSION['login']= true;
-    }
-}
+// if(isset($_COOKIE['login'])){
+//     if($_COOKIE['login']=='true'){
+//         $_SESSION['login']= true;
+//     }
+// }
 
-if (isset($_SESSION['login'])){
-    header("Location: login.php");
-    exit;
-}
+// if (isset($_SESSION['login'])){
+//     header("Location: login.php");
+//     exit;
+// }
 include_once "functions.php";
 
 if(isset($_POST['login'])){
 
-    $username = $_POST['username'];
+    $Nama_pelanggan = $_POST['Nama_pelanggan'];
     $password = $_POST['password'];
 
-   $result = mysqli_query($conn,"SELECT * FROM admins WHERE username = '$username';");
+   $result = mysqli_query($conn,"SELECT * FROM pelanggan WHERE Nama_pelanggan = '$Nama_pelanggan';");
 
    //cek username
    if(mysqli_num_rows($result)===1){
 
     //cek password
     $row = mysqli_fetch_assoc($result);
-   if(password_verify($password, $row['password'])){
+   if($password == $row['Password']){
 
     //cek session
-    $_SESSION['login']= true;
+    // $_SESSION['login']= true;
 
     //cek remember me
-    if(isset($_POST['remember'])){
-        //buat cookie
-        setcookie('login', 'true',  time()+60);
-    }
+    // if(isset($_POST['remember'])){
+    //     //buat cookie
+    //     setcookie('login', 'true',  time()+60);
+    // }
 
     header("Location: index.php");
     exit;
@@ -45,8 +45,6 @@ if(isset($_POST['login'])){
 
 
    $error = true;
-
-
 
 }
 
@@ -131,8 +129,8 @@ if(isset($_POST['login'])){
     <form action="" method="post">
         <ul>
             <li>
-                <label for="username">Username :</label>
-                <input type="text" name="username" id="username">
+                <label for="Nama_pelanggan">Nama Pelanggan :</label>
+                <input type="text" name="Nama_pelanggan" id="Nama_pelanggan">
             </li>
             <li>
                 <label for="password">Password :</label>
