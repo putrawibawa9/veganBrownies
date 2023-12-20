@@ -1,9 +1,9 @@
 <?php
-session_start();
-if (!isset($_SESSION['login'])){
-    header("Location: login.php");
-    exit;
-}
+// session_start();
+// if (!isset($_SESSION['login'])){
+//     header("Location: login.php");
+//     exit;
+// }
 require_once "functions.php";
 
 
@@ -14,7 +14,7 @@ if(isset($_POST['submit'])){
 
     
     //check the progress
-    if (tambahMahasiswa($_POST)>0){
+    if (tambahProduk($_POST)>0){
         echo "
             <script>
             alert('data berhasil ditambah');
@@ -29,13 +29,6 @@ if(isset($_POST['submit'])){
     ";
 
     }
-
-
-
-
-
-
-
 
 }
 ?>
@@ -114,25 +107,29 @@ if(isset($_POST['submit'])){
 </head>
 <body>
     
-<h1>Tambah Mahasiswa</h1>
+<h1>Tambah Produk</h1>
 
 <form action="" method="post">
 <ul>
     <li>
-        <label for="no">No :</label>
-        <input type="text" name="no" id="no" required >
+        <label for="Nama_produk">Nama Produk :</label>
+        <input type="text" name="Nama_produk" id="Nama_produk" required >
     </li>
     <li>
-        <label for="nama">Nama :</label>
-        <input type="text" name="nama" id="nama" required >
+        <label for="Foto_produk">Foto Produk :</label>
+        <input type="text" name="Foto_produk" id="Foto_produk" required >
     </li>
     <li>
-        <label for="Email">Email :</label>
-        <input type="text" name="email" id="Email" required >
+        <label for="Stok_produk">Stok Produk :</label>
+        <input type="text" name="Stok_produk" id="Stok_produk" required >
     </li>
     <li>
-        <label for="Jurusan">Jurusan :</label>
-        <input type="text" name="jurusan" id="Jurusan" required >
+        <label for="Deskripsi_produk">Deskripsi Produk :</label>
+        <input type="text" name="Deskripsi_produk" id="Deskripsi_produk" required >
+    </li>
+    <li>
+        <label for="Harga_produk">Harga Produk :</label>
+        <input type="text" name="Harga_produk" id="Harga_produk" required >
     </li>
     <button type="submit" name="submit">Post</button>
 </ul>

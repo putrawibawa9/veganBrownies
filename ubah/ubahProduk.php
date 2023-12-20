@@ -1,17 +1,15 @@
 <?php
-session_start();
-if (!isset($_SESSION['login'])){
-    header("Location: login.php");
-    exit;
-}
+// session_start();
+// if (!isset($_SESSION['login'])){
+//     header("Location: login.php");
+//     exit;
+// }
 require_once "../functions.php";
 
 //get that $_GET
-$no = $_GET['no'];
+$Id_produk = $_GET['Id_produk'];
 
-$mhs = query("SELECT * FROM students WHERE no= $no")[0];
-
-
+$pdk = query("SELECT * FROM produk WHERE Id_produk= $Id_produk")[0];
 
 
 //check whether the button has been click or not
@@ -19,7 +17,7 @@ if(isset($_POST['submit'])){
 
     
     //check the progress
-    if (ubahMahasiswa($_POST)>0){
+    if (ubahProduk($_POST)>0){
         echo "
             <script>
             alert('data berhasil diubah');
@@ -35,13 +33,6 @@ if(isset($_POST['submit'])){
 
     }
 
-
-
-
-
-
-
-
 }
 ?>
 <!DOCTYPE html>
@@ -49,7 +40,7 @@ if(isset($_POST['submit'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubah data</title>
+    <title>Ubah data Produk</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -119,26 +110,30 @@ if(isset($_POST['submit'])){
 </head>
 <body>
     
-<h1>Ubah Mahasiswa</h1>
+<h1>Ubah Data Produk</h1>
 
 <form action="" method="post">
-<input type="hidden" name="nim" value="<?= $mhs['nim']?>">
+<input type="hidden" name="Id_produk" value="<?= $pdk['Id_produk']?>">
 <ul>
     <li>
-        <label for="no">No :</label>
-        <input type="text" name="no" id="no" required value="<?= $mhs['no']; ?>">
+        <label for="Nama_produk">Nama Produk :</label>
+        <input type="text" name="Nama_produk" id="Nama_produk" required value="<?= $pdk['Nama_produk']; ?>">
     </li>
     <li>
-        <label for="nama">Nama :</label>
-        <input type="text" name="nama" id="nama" required value="<?= $mhs['nama']; ?>" >
+        <label for="Foto Produk">Foto Produk :</label>
+        <input type="text" name="Foto Produk" id="Foto Produk" required value="<?= $pdk['Foto Produk']; ?>" >
     </li>
     <li>
-        <label for="Email">Email :</label>
-        <input type="text" name="email" id="Email" required value="<?= $mhs['email']; ?>" >
+        <label for="Stok_produk">Stok Produk :</label>
+        <input type="text" name="Stok_produk" id="Stok_produk" required value="<?= $pdk['Stok_produk']; ?>" >
     </li>
     <li>
-        <label for="Jurusan">Jurusan :</label>
-        <input type="text" name="jurusan" id="Jurusan" required value="<?= $mhs['jurusan']; ?>" >
+        <label for="Deskripsi_produk">Deskripsi Produk :</label>
+        <input type="text" name="Deskripsi_produk" id="Deskripsi_produk" required value="<?= $pdk['Deskripsi_produk']; ?>" >
+    </li>
+    <li>
+        <label for="Harga_produk">Harga Produk :</label>
+        <input type="text" name="Harga_produk" id="Harga_produk" required value="<?= $pdk['Harga_produk']; ?>" >
     </li>
     <button type="submit" name="submit">Post</button>
 </ul>

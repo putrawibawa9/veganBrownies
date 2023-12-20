@@ -58,15 +58,14 @@ $produk = query("SELECT * FROM produk");
     <a href="logout.php">Logout</a>
     <h1>DAFTAR PRODUK</h1>
 
-    <!-- <a href="tambahMahasiswa.php">TAMBAH DATA MAHASISWA</a> -->
+    <a href="tambahMahasiswa.php">TAMBAH PRODUK</a>
 
-<!-- <form action="" method="get" class="form">
+ <!-- <form action="" method="get" class="form">
     <input type="text" name="keyword" autofocus placeholder="cari id/nama " autocomplete="off" 
     value="<?= $keyword;  ?>" >
     <button type="submit" name="cari">Cari</button>
-</form> -->
-        <!-- <form action="" method="post" class="form">
-
+</form>
+     <form action="" method="post" class="form"> 
             <input type="text" name="keywordNama" autofocus placeholder="cari nama" autocomplete="off" >
             <button type="submit" name="cariNama">Cari</button>
         </form> -->
@@ -80,6 +79,7 @@ $produk = query("SELECT * FROM produk");
             <th> Stok Produk</th>
             <th> Deskripsi Produk</th>
             <th> Harga Produk</th>
+            <th> Actions</th>
         </tr>
         
         <?php $i =1;?>
@@ -93,6 +93,9 @@ $produk = query("SELECT * FROM produk");
             <td><?= $row['Stok_produk']; ?></td>
             <td><?= $row['Deskripsi_produk']; ?></td>
             <td><?= $row['Harga_produk']; ?></td>
+            <td>
+               <a href="ubah/ubahProduk.php?Id_produk=<?$row['Id_produk']  ?>">Ubah</a>
+            </td>
             <?php $i++?>
         </tr>
         <?php endforeach; ?>

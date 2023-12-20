@@ -19,17 +19,19 @@ function query($query){
 }
 
 
-function tambahMahasiswa($data) {
+function tambahProduk($data) {
     global $conn;
   
-    $no = $data['no'];
-    $nama = $data['nama'];
-    $email = $data['email'];
-    $jurusan = $data['jurusan'];
+    $Nama_produk = $data['Nama_produk'];
+    $Foto_produk = $data['Foto_produk'];
+    $Stok_produk = $data['Stok_produk'];
+    $Deskripsi_produk = $data['Deskripsi_produk'];
+    $Harga_produk = $data['Harga_produk'];
+  
 
 //make the insert syntax
-$query = "INSERT INTO students VALUES 
-            ('$no','','$nama','$email','$jurusan')";
+$query = "INSERT INTO produk VALUES 
+            ('','$Nama_produk','$Foto_produk','$Stok_produk','$Deskripsi_produk','$Harga_produk')";
 
 mysqli_query($conn,$query);
 return mysqli_affected_rows($conn);
@@ -90,22 +92,23 @@ function hapusAdmins($id){
 }
 
 
-function ubahMahasiswa($data){
+function ubahProduk($data){
   global $conn;
-  $no = $data['no'];
-  $nama = $data['nama'];
-  $email = $data['email'];
-  $jurusan = $data['jurusan'];
-  $nim = $data['nim'];
+  $Id_produk = $data['Id_produk'];
+  $Nama_produk = $data['Nama_produk'];
+  $Foto_produk = $data['Foto_produk'];
+  $Stok_produk = $data['Stok_produk'];
+  $Deskripsi_produk = $data['Deskripsi_produk'];
+  $Harga_produk = $data['Harga_produk'];
 
 //make the insert syntax
-$query = "UPDATE students SET
-        no = $no,
-        nim = $nim,
-        nama = '$nama',
-        email = '$email',
-        jurusan = '$jurusan'
-        WHERE nim =$nim
+$query = "UPDATE produk SET
+        Nama_produk = '$Nama_produk',
+        Foto_produk = '$Foto_produk',
+        Stok_produk = $Stok_produk,
+        Deskripsi_produk = '$Deskripsi_produk',
+        Harga_produk = $Harga_produk
+        WHERE Id_produk =$Id_produk
         ";
 
 mysqli_query($conn,$query);
