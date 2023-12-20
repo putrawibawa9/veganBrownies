@@ -12,6 +12,8 @@ $Id_produk = $_GET['Id_produk'];
 $pdk = query("SELECT * FROM produk WHERE Id_produk= $Id_produk")[0];
 
 
+
+
 //check whether the button has been click or not
 if(isset($_POST['submit'])){
 
@@ -120,8 +122,8 @@ if(isset($_POST['submit'])){
         <input type="text" name="Nama_produk" id="Nama_produk" required value="<?= $pdk['Nama_produk']; ?>">
     </li>
     <li>
-        <label for="Foto Produk">Foto Produk :</label>
-        <input type="text" name="Foto Produk" id="Foto Produk" required value="<?= $pdk['Foto Produk']; ?>" >
+        <label for="Foto_produk">Foto Produk :</label>
+        <input type="text" name="Foto_produk" id="Foto_produk" required value="<?= $pdk['Foto_produk']; ?>" >
     </li>
     <li>
         <label for="Stok_produk">Stok Produk :</label>

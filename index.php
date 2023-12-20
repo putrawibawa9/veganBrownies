@@ -94,7 +94,7 @@ $produk = query("SELECT * FROM produk");
             <td><?= $row['Deskripsi_produk']; ?></td>
             <td><?= $row['Harga_produk']; ?></td>
             <td>
-               <a href="ubah/ubahProduk.php?Id_produk=<?$row['Id_produk']  ?>">Ubah</a>
+               <a href="ubah/ubahProduk.php?Id_produk=<?=$row['Id_produk'];?>">Ubah</a>
             </td>
             <?php $i++?>
         </tr>
