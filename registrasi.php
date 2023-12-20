@@ -7,7 +7,9 @@ if(isset($_POST['register'])){
     if (regristrasi($_POST) > 0) {
         echo "<script>
                 alert('user baru berhasil ditambahkan');
+                document.location.href = 'login.php';
               </script>";
+           
     } else {
         echo "<script>
                 alert('user gagal ditambahkan');

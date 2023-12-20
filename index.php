@@ -1,3 +1,12 @@
+<?php
+require_once "functions.php";
+
+
+$produk = query("SELECT * FROM produk");
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,15 +56,15 @@
 </head>
 <body>
     <a href="logout.php">Logout</a>
-    <h1>DAFTAR MAHASISWA</h1>
+    <h1>DAFTAR PRODUK</h1>
 
-    <a href="tambahMahasiswa.php">TAMBAH DATA MAHASISWA</a>
+    <!-- <a href="tambahMahasiswa.php">TAMBAH DATA MAHASISWA</a> -->
 
-<form action="" method="get" class="form">
+<!-- <form action="" method="get" class="form">
     <input type="text" name="keyword" autofocus placeholder="cari id/nama " autocomplete="off" 
     value="<?= $keyword;  ?>" >
     <button type="submit" name="cari">Cari</button>
-</form>
+</form> -->
         <!-- <form action="" method="post" class="form">
 
             <input type="text" name="keywordNama" autofocus placeholder="cari nama" autocomplete="off" >
@@ -64,29 +73,26 @@
     <!-- create the header -->
     <table border="1" cellpadding = '10' cellspacing = '0'>
         <tr>
-            <th> No</th>
-            <th> id</th>
-            <th> Aksi</th>
-            <th> Nim</th>
-            <th> Nama</th>
-            <th> Email</th>
-            <th> Jurusan</th>
+            <th> No </th>
+            <th> Id Produk</th>
+            <th> Nama Produk</th>
+            <th> Foto Produk </th>
+            <th> Stok Produk</th>
+            <th> Deskripsi Produk</th>
+            <th> Harga Produk</th>
         </tr>
         
         <?php $i =1;?>
         <!-- create the loop -->
-        <?php foreach($students as $row): ?>
+        <?php foreach($produk as $row): ?>
         <tr>
             <td><?= $i; ?></td>
-            <td><?= $row['no']; ?></td>
-            <td>
-                <a href="ubah/ubahMahasiswa.php?no=<?=$row['no'];?>">ubah</a> |
-                <a href="hapus/hapusMahasiswa.php?no=<?=$row['no'];?>" onclick="return confirm('yakin?');">hapus</a>
-            </td>
-            <td><?= $row['nim']; ?></td>
-            <td><?= $row['nama']; ?></td>
-            <td><?= $row['email']; ?></td>
-            <td><?= $row['jurusan']; ?></td>
+            <td><?= $row['Id_produk']; ?></td>
+            <td><?= $row['Nama_produk']; ?></td>
+            <td><?= $row['Foto_produk']; ?></td>
+            <td><?= $row['Stok_produk']; ?></td>
+            <td><?= $row['Deskripsi_produk']; ?></td>
+            <td><?= $row['Harga_produk']; ?></td>
             <?php $i++?>
         </tr>
         <?php endforeach; ?>
