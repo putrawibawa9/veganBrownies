@@ -1,18 +1,18 @@
 <?php
 
-// session_start();
+session_start();
 
-//cek cookie
+// cek cookie
 // if(isset($_COOKIE['login'])){
 //     if($_COOKIE['login']=='true'){
 //         $_SESSION['login']= true;
 //     }
 // }
 
-// if (isset($_SESSION['login'])){
-//     header("Location: login.php");
-//     exit;
-// }
+if (isset($_SESSION['login'])){
+    header("Location: login.php");
+    exit;
+}
 include_once "functions.php";
 
 if(isset($_POST['login'])){
@@ -29,15 +29,11 @@ if(isset($_POST['login'])){
     $row = mysqli_fetch_assoc($result);
    if($password == $row['Password']){
 
-    //cek session
-    // $_SESSION['login']= true;
 
-    //cek remember me
-    // if(isset($_POST['remember'])){
-    //     //buat cookie
-    //     setcookie('login', 'true',  time()+60);
-    // }
-
+    $_SESSION['is_auth'] = true;
+    $_SESSION['Nama_pelanggan'] = $row['Nama_pelanggan'];
+    $_SESSION['Id_pelanggan'] = $row['Id_pelanggan'];
+    $_SESSION['Alamat_pelanggan'] = $row['Alamat_pelanggan'];
     header("Location: index.php");
     exit;
    }

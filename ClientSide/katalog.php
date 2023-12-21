@@ -1,9 +1,33 @@
 <?php
+session_start();
 require_once "../functions.php";
 
 
 $produk = query("SELECT * FROM produk");
 
+
+if(isset($_POST['submit'])){
+
+    
+    //check the progress
+    $hasil_query = tambahPesanan($_POST);
+    if ($hasil_query>0){
+        echo "
+            <script>
+            alert('data berhasil ditambah');
+            document.location.href = 'invoice.php?id_pesanan=$hasil_query';
+            </script>
+        ";
+    }else{
+        echo " <script>
+        alert('data gagal ditambah');
+        document.location.href = 'katalog.php';
+        </script>
+    ";
+
+    }
+
+}
 
 
 ?>
@@ -55,10 +79,10 @@ $produk = query("SELECT * FROM produk");
     </style>
 </head>
 <body>
-    <a href="logout.php">Logout</a>
+    <a href="../logout.php">Logout</a>
     <h1>DAFTAR PRODUK</h1>
 
-    <a href="tambahMahasiswa.php">TAMBAH PRODUK</a>
+
 
  <!-- <form action="" method="get" class="form">
     <input type="text" name="keyword" autofocus placeholder="cari id/nama " autocomplete="off" 
@@ -78,6 +102,7 @@ $produk = query("SELECT * FROM produk");
             <th> Foto Produk </th>
             <th> Deskripsi Produk</th>
             <th> Harga Produk</th>
+            <th> Aksi</th>
         </tr>
         
         <?php $i =1;?>
@@ -90,6 +115,16 @@ $produk = query("SELECT * FROM produk");
             <td><img src="../img/<?= $row['Foto_produk']; ?>" width="100px" height="100px"></td>
             <td><?= $row['Deskripsi_produk']; ?></td>
             <td><?= $row['Harga_produk']; ?></td>
+            <td><a href="order.php?Id_produk=<?= $row['Id_produk'];?>">checkout</a></td>
+            <td>
+                <form action=""method="post">
+                    <input type="hidden" value="<?=$_SESSION['Id_pelanggan'];?>" name="Id_pelanggan">
+                    <input type="hidden" value="<?= $row['Id_produk'];?>" name="Id_produk">
+                    <input type="hidden" value="<?=$_SESSION['Alamat_pelanggan'];?>" name="Alamat_pesanan">
+                    <input type="hidden" value="<?= $row['Harga_produk'];?>" name="Total_pesanan">
+                    <input type="hidden" value="<?= date('Y-m-d');?>" name="Tgl_pesanan">
+                </form>
+           
             <?php $i++?>
         </tr>
         <?php endforeach; ?>

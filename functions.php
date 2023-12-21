@@ -217,4 +217,45 @@ function regristrasi($data){
 }
 
 
+function tambahPesanan($data) {
+  global $conn;
+  $Id_pelanggan = $data['Id_pelanggan'];
+  $Id_produk = $data['Id_produk'];
+  $Alamat_pesanan = $data['Alamat_pesanan'];
+  $Total_pesanan = $data['Total_pesanan'];
+  $Tgl_pesanan = $data['Tgl_pesanan'];
 
+  //upload gambar
+  // $Foto_produk = upload();
+  // if(!$Foto_produk){
+  //   return false;
+  // }
+
+//make the insert syntax
+global $conn;
+$result = mysqli_query($conn, 
+    "SELECT AUTO_INCREMENT
+    FROM information_schema.TABLES
+    WHERE TABLE_SCHEMA = 'brankas_kacamata' AND TABLE_NAME = 'pesanan';"
+);
+$row = mysqli_fetch_assoc($result);
+$id = $row["AUTO_INCREMENT"];
+$query = "INSERT INTO pesanan VALUES 
+          ('$id','$Id_pelanggan','$Id_produk','$Alamat_pesanan',' $Total_pesanan','$Tgl_pesanan')";
+
+mysqli_query($conn,$query);
+if (mysqli_affected_rows($conn)) {
+  return $id;
+} else {
+  return 0;
+}
+}
+
+
+function detail_query($query){
+  global $conn;
+  $result =mysqli_query($conn, $query);
+  $data = mysqli_fetch_assoc($result);
+
+  return $data;
+}

@@ -1,3 +1,16 @@
+<?php
+session_start();
+require_once "../functions.php";
+
+$id_pesanan = $_GET['id_pesanan'];
+$invoice = detail_query("SELECT * FROM pesanan WHERE Id_pesanan = $id_pesanan");
+
+$item = detail_query("SELECT * FROM pesanan JOIN produk ON (produk.Id_produk = pesanan.Id_produk)");
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,10 +87,10 @@
 
     <div class="invoice-details">
       <div>
-        <strong>Invoice Number:</strong> INV-001
+        <strong>Invoice Number:</strong> INV-<?= $invoice['Id_pesanan'] ?>
       </div>
       <div>
-        <strong>Date:</strong> December 21, 2023
+        <strong>Date:</strong><?= $invoice['Tgl_pesanan'] ?>
       </div>
     </div>
 
@@ -103,22 +116,14 @@
       <h2>Invoice Items</h2>
       <table>
         <tr>
-          <th>Description</th>
-          <th>Quantity</th>
+          <th>Nama Produk</th>
+          <th>Total Pesanan</th>
           <th>Unit Price</th>
-          <th>Total</th>
         </tr>
         <tr>
-          <td>Item 1</td>
-          <td>2</td>
-          <td>$50.00</td>
-          <td>$100.00</td>
-        </tr>
-        <tr>
-          <td>Item 2</td>
-          <td>1</td>
-          <td>$30.00</td>
-          <td>$30.00</td>
+            <td><?= $item['Nama_produk']; ?></td>
+            <td><?= $item['Total_pesanan']; ?></td>
+            <td><?= $item['Harga_produk']; ?></td>
         </tr>
       </table>
     </div>

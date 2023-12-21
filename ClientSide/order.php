@@ -1,12 +1,12 @@
 <?php
 session_start();
-require_once "functions.php";
+require_once "../functions.php";
 
+$Id_produk = $_GET['Id_produk'];
+$pesanan = query("SELECT * FROM pesanan JOIN produk ON (produk.Id_produk = pesanan.Id_produk) WHERE produk.Id_produk = $Id_produk;");
 
-$produk = query("SELECT * FROM produk");
-
-
-
+// var_dump($pesanan);
+// exit;
 
 
 ?>
@@ -59,9 +59,8 @@ $produk = query("SELECT * FROM produk");
 </head>
 <body>
     <a href="logout.php">Logout</a>
-    <h1>DAFTAR PRODUK</h1>
+    <h1>Pemesanan</h1>
 
-    <a href="tambahMahasiswa.php">TAMBAH PRODUK</a>
 
  <!-- <form action="" method="get" class="form">
     <input type="text" name="keyword" autofocus placeholder="cari id/nama " autocomplete="off" 
@@ -87,7 +86,7 @@ $produk = query("SELECT * FROM produk");
         
         <?php $i =1;?>
         <!-- create the loop -->
-        <?php foreach($produk as $row): ?>
+        <?php foreach($pesanan as $row): ?>
         <tr>
             <td><?= $i; ?></td>
             <td><?= $row['Id_produk']; ?></td>
