@@ -109,15 +109,15 @@ if(isset($_POST['submit'])){
     
 <h1>Tambah Produk</h1>
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
 <ul>
     <li>
         <label for="Nama_produk">Nama Produk :</label>
         <input type="text" name="Nama_produk" id="Nama_produk" required >
     </li>
     <li>
-        <label for="Foto_produk">Foto Produk :</label>
-        <input type="text" name="Foto_produk" id="Foto_produk" required >
+        <label for="Foto_produk">Gambar :</label>
+        <input type="file" name="Foto_produk" id="Foto_produk" required >
     </li>
     <li>
         <label for="Stok_produk">Stok Produk :</label>

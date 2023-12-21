@@ -1,9 +1,9 @@
 <?php
 
 require_once "../functions.php";
-$no = $_GET['no'];
+$Id_produk = $_GET['Id_produk'];
 
-if (hapusMahasiswa($no)>0){
+if (hapusProduk($Id_produk)>0){
     echo "<script>
             alert('data berhasil dihapus');
             document.location.href = '../index.php';

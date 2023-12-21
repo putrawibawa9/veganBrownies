@@ -71,9 +71,9 @@ return mysqli_affected_rows($conn);
 
 
 
-function hapusMahasiswa($no){
+function hapusProduk($Id_produk){
   global $conn;
-  mysqli_query($conn,"DELETE FROM students WHERE no = $no");
+  mysqli_query($conn,"DELETE FROM produk WHERE Id_produk = $Id_produk");
   return mysqli_affected_rows($conn);
 }
 
@@ -240,4 +240,53 @@ function regristrasi($data){
   //tambah user baru ke database
   mysqli_query($conn,"INSERT INTO pelanggan VALUES('','$password','$Nama_pelanggan','', '$Alamat_pelanggan')");
   return mysqli_affected_rows($conn);
+}
+
+
+
+function upload(){
+  $namaFile = $_FILES['gambar']['name'];
+  $ukuranFile =  $_FILES['gambar']['size'];
+  $error =  $_FILES['gambar']['error'];  
+  $tmp =  $_FILES['gambar']['tmp_name'];  
+
+  //cek apakah user sudah menambah gambar
+
+  if($error ===4){
+    echo "<script>
+        alert ('pilih gambar dulu');
+          </script>";
+          return false;
+  }
+
+  //cek apakah yang diupload adalah gambar
+  $ekstensiGambarValid =['jpg','jpeg', 'png'];
+  $ekstensiGambar = explode('.', $namaFile); 
+  $ekstensiGambar = strtolower(end($ekstensiGambar)); 
+  if(!in_array($ekstensiGambar,$ekstensiGambarValid)){
+    echo "<script>
+        alert ('format gambar salah!');
+          </script>";
+          return false;
+  }
+
+  //cek jika ukurannya terlalu besar
+  if ($ukuranFile > 1000000){
+    echo "<script>
+        alert ('Ukuran terlalu besar');
+          </script>";
+  }
+
+  //generate nama file random
+  $namaFileBaru = uniqid();
+  $namaFileBaru .= '.';
+  $namaFileBaru .= $ekstensiGambar;
+
+
+  //lolos semua hasil cek, lalu dijalankan
+  move_uploaded_file($tmp, 'img/'.$namaFileBaru);
+
+  return $namaFileBaru;
+
+
 }

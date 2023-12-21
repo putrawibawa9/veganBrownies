@@ -89,12 +89,13 @@ $produk = query("SELECT * FROM produk");
             <td><?= $i; ?></td>
             <td><?= $row['Id_produk']; ?></td>
             <td><?= $row['Nama_produk']; ?></td>
-            <td><?= $row['Foto_produk']; ?></td>
+            <td><img src="img/<?= $row['Foto_produk']; ?>" width="100px" height="100px"></td>
             <td><?= $row['Stok_produk']; ?></td>
             <td><?= $row['Deskripsi_produk']; ?></td>
             <td><?= $row['Harga_produk']; ?></td>
             <td>
                <a href="ubah/ubahProduk.php?Id_produk=<?=$row['Id_produk'];?>">Ubah</a>
+               <a href="hapus/hapusProduk.php?Id_produk=<?=$row['Id_produk'];?>" onclick="return confirm('yakin?');">hapus</a>
             </td>
             <?php $i++?>
         </tr>
