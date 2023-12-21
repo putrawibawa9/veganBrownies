@@ -1,5 +1,6 @@
 <?php
 
+
 $conn =mysqli_connect("localhost","root","","brankas_kacamata");
 
 
@@ -9,7 +10,6 @@ function query($query){
     
     //make an empty array
     $rows = [];
-
     //loop the $result
 
     while( $row = mysqli_fetch_assoc($result)){
@@ -104,10 +104,6 @@ function upload(){
   return $namaFileBaru;
 }
 
-
-
-
-
 function hapusProduk($Id_produk){
   global $conn;
   mysqli_query($conn,"DELETE FROM produk WHERE Id_produk = $Id_produk");
@@ -117,7 +113,7 @@ function hapusProduk($Id_produk){
 
 
 
-function ubahProduk($data){
+function ubahProduk__($data){
   global $conn;
   $Id_produk = $data['Id_produk'];
   $Nama_produk = $data['Nama_produk'];
@@ -140,6 +136,38 @@ mysqli_query($conn,$query);
 return mysqli_affected_rows($conn);
 }
 
+
+function ubahProduk($data){
+  global $conn;
+  $Id_produk = $data['Id_produk'];
+  $Nama_produk = $data['Nama_produk'];
+  $Stok_produk = $data['Stok_produk'];
+  $Deskripsi_produk = $data['Deskripsi_produk'];
+  $Harga_produk = $data['Harga_produk'];
+  $gambarLama = $data['gambarLama'];
+
+
+  //check whether user pick a new image or not
+  if($_FILES['Foto_produk']['error']===4){
+    $Foto_produk = $gambarLama;
+  }else{
+    $Foto_produk = upload();
+  }
+
+
+//make the insert syntax
+$query = "UPDATE produk SET
+        Nama_produk = '$Nama_produk',
+        Foto_produk = '$Foto_produk',
+        Stok_produk = '$Stok_produk',
+        Deskripsi_produk = '$Deskripsi_produk',
+        Harga_produk = $Harga_produk
+        WHERE  Id_produk = $Id_produk
+        ";
+
+mysqli_query($conn,$query);
+return mysqli_affected_rows($conn);
+}
 
 
 

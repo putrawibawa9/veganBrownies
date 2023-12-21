@@ -1,5 +1,5 @@
 <?php
-require_once "functions.php";
+require_once "../functions.php";
 
 
 $produk = query("SELECT * FROM produk");
@@ -76,10 +76,8 @@ $produk = query("SELECT * FROM produk");
             <th> Id Produk</th>
             <th> Nama Produk</th>
             <th> Foto Produk </th>
-            <th> Stok Produk</th>
             <th> Deskripsi Produk</th>
             <th> Harga Produk</th>
-            <th> Actions</th>
         </tr>
         
         <?php $i =1;?>
@@ -89,14 +87,9 @@ $produk = query("SELECT * FROM produk");
             <td><?= $i; ?></td>
             <td><?= $row['Id_produk']; ?></td>
             <td><?= $row['Nama_produk']; ?></td>
-            <td><img src="img/<?= $row['Foto_produk']; ?>" width="100px" height="100px"></td>
-            <td><?= $row['Stok_produk']; ?></td>
+            <td><img src="../img/<?= $row['Foto_produk']; ?>" width="100px" height="100px"></td>
             <td><?= $row['Deskripsi_produk']; ?></td>
             <td><?= $row['Harga_produk']; ?></td>
-            <td>
-               <a href="ubahProduk.php?Id_produk=<?=$row['Id_produk'];?>">Ubah</a>
-               <a href="hapus/hapusProduk.php?Id_produk=<?=$row['Id_produk'];?>" onclick="return confirm('yakin?');">hapus</a>
-            </td>
             <?php $i++?>
         </tr>
         <?php endforeach; ?>

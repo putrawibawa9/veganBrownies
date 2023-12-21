@@ -4,7 +4,7 @@
 //     header("Location: login.php");
 //     exit;
 // }
-require_once "../functions.php";
+require_once "functions.php";
 
 //get that $_GET
 $Id_produk = $_GET['Id_produk'];
@@ -12,10 +12,15 @@ $Id_produk = $_GET['Id_produk'];
 $pdk = query("SELECT * FROM produk WHERE Id_produk= $Id_produk")[0];
 
 
+// echo $pdk['Foto_produk'];
+// exit;
+
+
 
 
 //check whether the button has been click or not
 if(isset($_POST['submit'])){
+
 
     
     //check the progress
@@ -23,13 +28,13 @@ if(isset($_POST['submit'])){
         echo "
             <script>
             alert('data berhasil diubah');
-            document.location.href = '../index.php';
+            document.location.href = 'index.php';
             </script>
         ";
     }else{
         echo " <script>
         alert('data gagal diubah');
-        document.location.href = '../index.php';
+        document.location.href = 'index.php';
         </script>
     ";
 
@@ -114,8 +119,9 @@ if(isset($_POST['submit'])){
     
 <h1>Ubah Data Produk</h1>
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
 <input type="hidden" name="Id_produk" value="<?= $pdk['Id_produk']?>">
+<input type="hidden" name="gambarLama" value="<?= $pdk['Foto_produk']?>">
 <ul>
     <li>
         <label for="Nama_produk">Nama Produk :</label>
@@ -123,7 +129,9 @@ if(isset($_POST['submit'])){
     </li>
     <li>
         <label for="Foto_produk">Foto Produk :</label>
-        <input type="text" name="Foto_produk" id="Foto_produk" required value="<?= $pdk['Foto_produk']; ?>" >
+        <input type="file" name="Foto_produk" id="nama">
+
+        <img src="img/<?= $pdk['Foto_produk'] ?>" width="100px" height="100px">
     </li>
     <li>
         <label for="Stok_produk">Stok Produk :</label>
