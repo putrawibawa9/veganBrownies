@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
         echo "
             <script>
             alert('data berhasil ditambah');
-            document.location.href = 'invoice.php?id_pesanan=$hasil_query';
+            document.location.href = 'order.php?Id_pesanan=$hasil_query';
             </script>
         ";
     }else{
@@ -115,7 +115,7 @@ if(isset($_POST['submit'])){
             <td><img src="../img/<?= $row['Foto_produk']; ?>" width="100px" height="100px"></td>
             <td><?= $row['Deskripsi_produk']; ?></td>
             <td><?= $row['Harga_produk']; ?></td>
-            <td><a href="order.php?Id_produk=<?= $row['Id_produk'];?>">checkout</a></td>
+            <!-- <td><a href="order.php?Id_produk=<?= $row['Id_produk'];?>">checkout</a></td> -->
             <td>
                 <form action=""method="post">
                     <input type="hidden" value="<?=$_SESSION['Id_pelanggan'];?>" name="Id_pelanggan">
@@ -123,7 +123,9 @@ if(isset($_POST['submit'])){
                     <input type="hidden" value="<?=$_SESSION['Alamat_pelanggan'];?>" name="Alamat_pesanan">
                     <input type="hidden" value="<?= $row['Harga_produk'];?>" name="Total_pesanan">
                     <input type="hidden" value="<?= date('Y-m-d');?>" name="Tgl_pesanan">
+                    <button name="submit">Checkout</button>
                 </form>
+            </td>
            
             <?php $i++?>
         </tr>

@@ -2,10 +2,18 @@
 session_start();
 require_once "../functions.php";
 
-$id_pesanan = $_GET['id_pesanan'];
-$invoice = detail_query("SELECT * FROM pesanan WHERE Id_pesanan = $id_pesanan");
+$Id_pesanan = $_GET['Id_pesanan'];
+$order = query("SELECT * FROM pesanan JOIN produk ON (produk.Id_produk = pesanan.Id_produk) WHERE Id_pesanan = $Id_pesanan")[0];
 
-$item = detail_query("SELECT * FROM pesanan JOIN produk ON (produk.Id_produk = pesanan.Id_produk)");
+
+
+
+
+
+
+// $invoice = detail_query("SELECT * FROM pesanan WHERE Id_pesanan = $id_pesanan");
+
+// $item = detail_query("SELECT * FROM pesanan JOIN produk ON (produk.Id_produk = pesanan.Id_produk)");
 
 
 
@@ -87,10 +95,10 @@ $item = detail_query("SELECT * FROM pesanan JOIN produk ON (produk.Id_produk = p
 
     <div class="invoice-details">
       <div>
-        <strong>Invoice Number:</strong> INV-<?= $invoice['Id_pesanan'] ?>
+        <strong>Invoice Number:</strong> INV- <?= $order['Id_pesanan'] ?>
       </div>
       <div>
-        <strong>Date:</strong><?= $invoice['Tgl_pesanan'] ?>
+        <strong>Date:</strong><?= $order['Tgl_pesanan'] ?>
       </div>
     </div>
 
@@ -99,15 +107,11 @@ $item = detail_query("SELECT * FROM pesanan JOIN produk ON (produk.Id_produk = p
       <table>
         <tr>
           <th>Name</th>
-          <td>John Doe</td>
-        </tr>
-        <tr>
-          <th>Email</th>
-          <td>john@example.com</td>
+          <td><?=$_SESSION['Nama_pelanggan']?></td>
         </tr>
         <tr>
           <th>Address</th>
-          <td>123 Main St, Cityville</td>
+          <td><?=$_SESSION['Alamat_pelanggan']?></td>
         </tr>
       </table>
     </div>
@@ -117,19 +121,13 @@ $item = detail_query("SELECT * FROM pesanan JOIN produk ON (produk.Id_produk = p
       <table>
         <tr>
           <th>Nama Produk</th>
-          <th>Total Pesanan</th>
-          <th>Unit Price</th>
+          <th>Harga Pesanan</th>
         </tr>
         <tr>
-            <td><?= $item['Nama_produk']; ?></td>
-            <td><?= $item['Total_pesanan']; ?></td>
-            <td><?= $item['Harga_produk']; ?></td>
+            <td><?= $order['Nama_produk']; ?></td>
+            <td><?= $order['Harga_produk']; ?></td>
         </tr>
       </table>
-    </div>
-
-    <div id="total">
-      <p><strong>Total:</strong> $130.00</p>
     </div>
 
     <div id="thanks">
